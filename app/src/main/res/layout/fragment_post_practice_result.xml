@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".fragments.GetPracticeFragment">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="@string/ip"
+            android:textStyle="bold"
+            android:textColor="#000"
+            android:layout_marginStart="10dp"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+        <EditText
+            android:id="@+id/fragment_post_practice_result_ed_ip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:hint="@string/hint_ip" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="@string/practice_id"
+            android:layout_marginStart="10dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="#000"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <EditText
+            android:id="@+id/fragment_post_practice_result_ed_practiceId"
+            android:hint="@string/practice_id"
+            android:text="@string/_2"
+            android:inputType="number"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="@string/max_1_0"
+            android:layout_marginStart="10dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="#000"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+        <EditText
+            android:id="@+id/fragment_post_practice_result_ed_scroreRatio"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/max_1_0_1"
+            android:inputType="numberDecimal"
+            android:text="@string/_2" />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="@string/err"
+            android:layout_marginStart="10dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="#000"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <EditText
+            android:id="@+id/fragment_post_practice_result_ed_wrongQuestionIds"
+            android:hint="@string/err_hint"
+            android:text="@string/_1_2_3_hint"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="@string/phoneno"
+            android:layout_marginStart="10dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="#000"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <EditText
+            android:id="@+id/fragment_post_practice_result_ed_phoneNo"
+            android:hint="@string/mac"
+            android:text="@string/_2"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/fragment_post_practice_result_bt_post"
+        android:text="@string/post_result"
+        android:textStyle="bold"
+        android:textColor="#000"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+        <EditText
+            android:id="@+id/fragment_post_practice_result_ed_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </ScrollView>
+</LinearLayout>

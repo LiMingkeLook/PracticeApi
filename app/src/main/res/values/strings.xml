@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">PracticeApi</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="prompt_email">iphone</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="ip">IP：</string>
+    <string name="hint_ip">ip</string>
+    <string name="practice_id">练习id：</string>
+    <string name="practice_count">练习数量：</string>
+    <string name="practice_count_hint">练习数量</string>
+    <string name="_2">2</string>
+    <string name="max_1_0">分数比例（max：1.0）：</string>
+    <string name="max_1_0_1">分数比例（max：1.0）</string>
+    <string name="err">错误的题目：</string>
+    <string name="err_hint">错误的题目</string>
+    <string name="_1_2_3_hint">1、2、3</string>
+    <string name="phoneno">phoneNo：</string>
+    <string name="mac">手机号或mac</string>
+    <string name="post_result">上传结果</string>
+</resources>

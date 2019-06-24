@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".fragments.GetPracticeFragment">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="IP："
+            android:textStyle="bold"
+            android:textColor="#000"
+            android:layout_marginStart="10dp"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+        <EditText
+            android:id="@+id/fragment_get_question_ed_ip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:hint="ip" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:gravity="center"
+            android:text="课程id："
+            android:textColor="#000"
+            android:textStyle="bold" />
+        <EditText
+            android:id="@+id/fragment_get_question_ed_courseId"
+            android:hint="练习Id"
+            android:text="2"
+            android:inputType="number"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="练习id："
+            android:layout_marginStart="10dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="#000"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <EditText
+            android:id="@+id/fragment_get_question_ed_practiceId"
+            android:hint="练习Id"
+            android:text="2"
+            android:inputType="number"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="学生id："
+            android:layout_marginStart="10dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="#000"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <EditText
+            android:id="@+id/fragment_get_question_ed_studentId"
+            android:hint="练习Id"
+            android:text="2"
+            android:inputType="number"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/fragment_get_question_bt_getQuestion"
+        android:text="请求获取题目"
+        android:textStyle="bold"
+        android:textColor="#000"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+        <EditText
+            android:id="@+id/fragment_get_question_ed_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </ScrollView>
+</LinearLayout>

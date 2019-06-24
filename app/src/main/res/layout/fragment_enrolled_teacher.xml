@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.EnrolledTeacherFragment">
+
+    <Button
+        android:id="@+id/fragment_enrolled_teacher_btn_on"
+        android:text="注册教师"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/hello_blank_fragment" />
+    </LinearLayout>
+    <EditText
+        android:id="@+id/fragment_enrolled_teacher_ed_hint"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/hello_blank_fragment" />
+
+</LinearLayout>
