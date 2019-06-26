@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:textSize="100sp"
+        android:textSize="80sp"
         android:text="学生"/>
     <Button
         android:id="@+id/activity_home_teacher"
@@ -21,6 +21,14 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:textSize="100sp"
+        android:textSize="80sp"
         android:text="教师"/>
+    <Button
+        android:id="@+id/activity_home_admin"
+        android:layout_margin="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:textSize="80sp"
+        android:text="管理员"/>
 </LinearLayout>

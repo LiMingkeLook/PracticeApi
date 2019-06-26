@@ -5,40 +5,36 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context=".activities.StudentActivity">
+    tools:context=".activities.student.PracticeActivity">
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:background="#19FF00E7"
+        android:background="#19FF2600"
         android:gravity="center_vertical"
         android:padding="10dp"
         android:layout_height="wrap_content">
         <TextView
+            android:id="@+id/activity_practice_tv_courseName"
             android:textStyle="bold"
-            android:textColor="#FC00DA"
-            android:text="所有教师"
+            android:textColor="#000000"
+            android:text="所有课程"
             android:gravity="center"
             android:layout_marginEnd="10dp"
             android:layout_width="wrap_content"
             android:layout_height="30dp" />
-        <View
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="0dp"/>
-        <Button
-            android:id="@+id/activity_student_bt_addCourse"
-            android:background="#17F500"
-            android:textColor="#FFFFFF"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:text="申请课程"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp" />
     </LinearLayout>
-    <net.lzzy.practiceapi.utils.StaticViewPager
-        android:id="@+id/activity_main_vp"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/activity_practice_swipe"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <ListView
+            android:id="@+id/activity_practice_lv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </ListView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    </net.lzzy.practiceapi.utils.StaticViewPager>
+    <include
+        android:id="@+id/activity_practice_empty"
+        layout="@layout/empty_data"/>
 </LinearLayout>

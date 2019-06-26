@@ -17,8 +17,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.TeacherActivity"></activity>
-        <activity android:name=".activities.HomeActivity">
+        <activity android:name=".activities.teacher.ManagePracticesActivity"></activity>
+        <activity
+            android:name=".activities.teacher.ManageStudentsActivity"
+            android:label="管理学生" />
+        <activity
+            android:name=".activities.teacher.ManagementCourseActivity"
+            android:label="管理课程" />
+        <activity
+            android:name=".activities.admin.AdminActivity"
+            android:label="超级管理员" />
+        <activity
+            android:name=".activities.student.PracticeActivity"
+            android:label="章节列表" />
+        <activity
+            android:name=".activities.student.TeacherCourseActivity"
+            android:label="所有课程" />
+        <activity
+            android:name=".activities.teacher.MyCourseActivity"
+            android:label="我的课程" />
+        <activity
+            android:name=".activities.HomeActivity"
+            android:label="选择角色">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,8 +48,12 @@
         <activity
             android:name=".activities.LoginActivity"
             android:label="@string/title_activity_login" />
-        <activity android:name=".activities.StudentActivity" />
-        <activity android:name=".activities.MainActivity" />
+        <activity
+            android:name=".activities.student.MyTeacherActivity"
+            android:label="选择老师" />
+        <activity
+            android:name=".activities.MainActivity"
+            android:label="测试用" />
     </application>
 
 </manifest>

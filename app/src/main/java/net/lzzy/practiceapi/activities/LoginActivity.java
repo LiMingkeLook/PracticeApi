@@ -8,7 +8,6 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -21,7 +20,11 @@ import com.google.gson.Gson;
 import net.lzzy.practiceapi.R;
 import net.lzzy.practiceapi.Thread.LoginThread;
 import net.lzzy.practiceapi.Thread.RequestThread;
+import net.lzzy.practiceapi.activities.admin.AdminActivity;
+import net.lzzy.practiceapi.activities.student.MyTeacherActivity;
+import net.lzzy.practiceapi.activities.teacher.MyCourseActivity;
 import net.lzzy.practiceapi.connstants.ApiConstants;
+import net.lzzy.practiceapi.models.Admin;
 import net.lzzy.practiceapi.models.Student;
 import net.lzzy.practiceapi.models.Teacher;
 import net.lzzy.practiceapi.utils.AppUtils;
@@ -133,7 +136,7 @@ public class LoginActivity extends AppCompatActivity {
                                             protected void onPostExecute(String s, LoginActivity loginActivity) {
                                                 try {
                                                     s = StudentKeyUtils.decodeResponse(s).first;
-                                                    if (s.contains("\"RESULT\", \"S\"")) {
+                                                    if (s.contains("\"RESULT\":\"S\"")) {
                                                         dialog.dismiss();
                                                     }
                                                     Toast.makeText(loginActivity, s, Toast.LENGTH_LONG).show();
@@ -233,14 +236,21 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+        if (user.equals("admin")){
+            register.setVisibility(View.GONE);
+        }
         findViewById(R.id.skip_login).
                 setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         if (user.equals("student")) {
-                            startActivity(new Intent(LoginActivity.this, StudentActivity.class));
-                        } else {
-                            startActivity(new Intent(LoginActivity.this, TeacherActivity.class));
+                            startActivity(new Intent(LoginActivity.this, MyTeacherActivity.class));
+                        } else if (user.equals("teacher")){
+                            startActivity(new Intent(LoginActivity.this, MyCourseActivity.class));
+                        }else if (user.equals("admin")){
+                            startActivity(new Intent(LoginActivity.this, AdminActivity.class));
+                        }else {
+                            Toast.makeText(LoginActivity.this, "请从新选择角色", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -273,11 +283,20 @@ public class LoginActivity extends AppCompatActivity {
                                     if (user.equals("student")) {
                                         Student student = gson.fromJson(object.getString("student"), Student.class);
                                         AppUtils.setStudent(student);
-                                        startActivity(new Intent(LoginActivity.this, StudentActivity.class));
-                                    } else {
+                                        Intent intent=new Intent(LoginActivity.this, MyTeacherActivity.class);
+                                        intent.putExtra("teachers",object.getString("teachers"));
+                                        startActivity(intent);
+                                    } else if (user.equals("teacher")){
                                         Teacher teacher = gson.fromJson(object.getString("teacher"), Teacher.class);
                                         AppUtils.setTeacher(teacher);
-                                        startActivity(new Intent(LoginActivity.this, TeacherActivity.class));
+                                        Intent intent=new Intent(LoginActivity.this, MyCourseActivity.class);
+                                        intent.putExtra("courses",object.getString("courses"));
+                                        startActivity(intent);
+                                    }else if (user.equals("admin")){
+                                        Admin admin = gson.fromJson(object.getString("admin"), Admin.class);
+                                        AppUtils.setAdmin(admin);
+                                        Intent intent=new Intent(LoginActivity.this, AdminActivity.class);
+                                        startActivity(intent);
                                     }
 
                                 } else {

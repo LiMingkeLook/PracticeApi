@@ -133,6 +133,7 @@
         android:layout_width="match_parent"
         android:layout_height="2dp" />
     <LinearLayout
+        android:id="@+id/layout_pw2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">

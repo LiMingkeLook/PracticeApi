@@ -19,10 +19,21 @@ public class Teacher {
 
     private Integer valid;//0、1、2
 
-    private String imghead;
-    @Override
-    public String toString() {
-    	// TODO Auto-generated method stub
+    private String imgHead;
+    private Boolean isMyTeacher;
+
+    public Boolean isMyTeacher() {
+        return isMyTeacher;
+    }
+
+    public void setIsMyTeacher(Boolean isMyTeacher) {
+        isMyTeacher = isMyTeacher;
+    }
+    /**
+     * Web to android
+     * @return
+     */
+    public String toStudentJSON(Boolean isMyTeacher) {
     	JSONObject json=new JSONObject();
         try {
             json.put("teacherId", teacherId);
@@ -30,12 +41,32 @@ public class Teacher {
             json.put("email", email);
             json.put("iphone", iphone);
             json.put("gender", gender);
-            json.put("imghead", imghead);
+            json.put("imgHead", imgHead);
+            json.put("isMyTeacher", isMyTeacher);
         } catch (JSONException e) {
             e.printStackTrace();
         }
     	return json.toString();
-    }
+	}
+
+    /**
+     * Web to android
+     * @return
+     */
+    public String toTeacherJSON() {
+    	JSONObject json=new JSONObject();
+        try {
+            json.put("teacherId", teacherId);
+            json.put("name", name);
+            json.put("email", email);
+            json.put("iphone", iphone);
+            json.put("gender", gender);
+            json.put("imgHead", imgHead);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    	return json.toString();
+	}
     public String getTeacherId() {
         return teacherId;
     }
@@ -73,7 +104,7 @@ public class Teacher {
     }
 
     public void setIphone(String iphone) {
-        this.iphone = iphone == null ? null : iphone.trim();
+        this.iphone = iphone ;
     }
 
     public String getGender() {
@@ -81,7 +112,7 @@ public class Teacher {
     }
 
     public void setGender(String gender) {
-        this.gender = gender == null ? null : gender.trim();
+        this.gender = gender;
     }
 
     public Integer getValid() {
@@ -92,11 +123,11 @@ public class Teacher {
         this.valid = valid;
     }
 
-    public String getImghead() {
-        return imghead;
+    public String getImgHead() {
+        return imgHead;
     }
 
-    public void setImghead(String imghead) {
-        this.imghead = imghead == null ? null : imghead.trim();
+    public void setImgHead(String imgHead) {
+        this.imgHead = imgHead;
     }
 }

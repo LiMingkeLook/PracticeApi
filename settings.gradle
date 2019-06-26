@@ -1,1 +1,1 @@
-include ':app', ':BASE64', ':tomcat-util'
+include ':app', ':BASE64', ':tomcat-util', ':sqllib'

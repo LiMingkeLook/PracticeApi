@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context=".activities.student.MyTeacherActivity">
+    tools:context=".activities.student.TeacherCourseActivity">
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -14,27 +14,27 @@
         android:padding="10dp"
         android:layout_height="wrap_content">
         <TextView
+            android:id="@+id/activity_teacher_course_teacherName"
             android:textStyle="bold"
             android:textColor="#FC00DA"
-            android:text="选择Api接口："
+            android:text="所有课程"
             android:gravity="center"
             android:layout_marginEnd="10dp"
             android:layout_width="wrap_content"
             android:layout_height="30dp" />
-        <TextView
-            android:id="@+id/activity_main_tv_api"
-            android:background="@drawable/dot_style"
-            android:textColor="#FF0000"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:text="111"
-            android:layout_width="match_parent"
-            android:layout_height="30dp" />
     </LinearLayout>
-    <net.lzzy.practiceapi.utils.StaticViewPager
-        android:id="@+id/activity_main_vp"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/activity_teacher_course_swipe"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <ListView
+            android:id="@+id/activity_teacher_course_lv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </ListView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    </net.lzzy.practiceapi.utils.StaticViewPager>
+    <include
+        android:id="@+id/activity_teacher_course_empty"
+        layout="@layout/empty_data"/>
 </LinearLayout>

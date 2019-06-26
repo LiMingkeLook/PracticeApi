@@ -19,6 +19,8 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         Button btStudent=findViewById(R.id.activity_home_student);
         Button btTeacher=findViewById(R.id.activity_home_teacher);
+        Button btAdmin=findViewById(R.id. activity_home_admin);
+
         Intent intent=new Intent(HomeActivity.this,LoginActivity.class);
         btStudent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,6 +33,13 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 intent.putExtra(USER,"teacher");
+                startActivity(intent);
+            }
+        });
+        btAdmin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent.putExtra(USER,"admin");
                 startActivity(intent);
             }
         });

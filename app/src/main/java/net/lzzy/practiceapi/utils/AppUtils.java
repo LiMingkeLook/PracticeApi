@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.util.Pair;
 
+import net.lzzy.practiceapi.models.Admin;
 import net.lzzy.practiceapi.models.Student;
 import net.lzzy.practiceapi.models.Teacher;
 
@@ -70,6 +71,15 @@ public class AppUtils extends Application {
         AppUtils.ip = ip;
     }
     private static Teacher teacher;
+    private static Admin admin;
+
+    public static Admin getAdmin() {
+        return admin;
+    }
+
+    public static void setAdmin(Admin admin) {
+        AppUtils.admin = admin;
+    }
 
     public static Teacher getTeacher() {
         return teacher;
