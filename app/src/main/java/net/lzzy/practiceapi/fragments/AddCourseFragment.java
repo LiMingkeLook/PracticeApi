@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import net.lzzy.practiceapi.R;
 import net.lzzy.practiceapi.Thread.AddCouseFragmentThread;
 import net.lzzy.practiceapi.Thread.EnrolledStudentThread;
+import net.lzzy.practiceapi.connstants.ApiConstants;
 import net.lzzy.practiceapi.utils.AppUtils;
 import net.lzzy.practiceapi.utils.KeyUtils;
 
@@ -40,12 +41,7 @@ public class AddCourseFragment extends BaseFragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String ip="192.168.123.197:8080";
-                if (!AppUtils.getIp().equals("")){
-                    ip=AppUtils.getIp();
-                }else {
-                    ip=AppUtils.NONE_IP;
-                }
+                String ip=ApiConstants.getIpDelimiterPort();
                 JSONObject jsonObject=new JSONObject();
                 JSONArray jsonArray=new JSONArray();
                 JSONObject object=new JSONObject();

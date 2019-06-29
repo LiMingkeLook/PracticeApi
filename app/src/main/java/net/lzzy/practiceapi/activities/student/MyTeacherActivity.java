@@ -17,7 +17,7 @@ import com.google.gson.reflect.TypeToken;
 import net.lzzy.practiceapi.R;
 import net.lzzy.practiceapi.Thread.RequestThread;
 import net.lzzy.practiceapi.connstants.ApiConstants;
-import net.lzzy.practiceapi.models.Student;
+import net.lzzy.practiceapi.models.student.Student;
 import net.lzzy.practiceapi.models.Teacher;
 import net.lzzy.practiceapi.utils.AppUtils;
 import net.lzzy.practiceapi.utils.StudentKeyUtils;
@@ -92,7 +92,7 @@ public class MyTeacherActivity extends AppCompatActivity {
                 try {
                     jsonObject.put("user","student");
                     jsonObject.put("studentId",student.getStudentId());
-                    jsonObject.put("key", AppUtils.getKey());
+                    jsonObject.put("key", ApiConstants.getKey());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

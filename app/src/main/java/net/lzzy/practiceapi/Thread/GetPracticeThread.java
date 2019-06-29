@@ -3,6 +3,7 @@ package net.lzzy.practiceapi.Thread;
 import android.os.AsyncTask;
 
 
+import net.lzzy.practiceapi.connstants.ApiConstants;
 import net.lzzy.practiceapi.utils.AppUtils;
 import net.lzzy.practiceapi.network.ApiService;
 import net.lzzy.practiceapi.utils.KeyUtils;
@@ -37,7 +38,7 @@ public abstract class GetPracticeThread<T> extends AsyncTask<Integer,Integer, St
             try {
                 jsonObject.put("courseId",integers[0]);
                 jsonObject.put("studentId",integers[1]);
-                jsonObject.put("key",AppUtils.getKey());
+                jsonObject.put("key", ApiConstants.getKey());
                 return ApiService.okRequest("http://"+ip+"/Practice/api/get_practice"
                         , StudentKeyUtils.encryptionRequest(jsonObject.toString()));
             } catch (Exception e) {

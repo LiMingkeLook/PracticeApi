@@ -5,6 +5,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -21,14 +22,19 @@ import com.google.gson.reflect.TypeToken;
 import net.lzzy.practiceapi.R;
 import net.lzzy.practiceapi.Thread.RequestThread;
 import net.lzzy.practiceapi.activities.HomeActivity;
+import net.lzzy.practiceapi.activities.LoginActivity;
 import net.lzzy.practiceapi.connstants.ApiConstants;
 import net.lzzy.practiceapi.models.Practice;
-import net.lzzy.practiceapi.models.Student;
+import net.lzzy.practiceapi.models.student.SOption;
+import net.lzzy.practiceapi.models.student.SQuestion;
+import net.lzzy.practiceapi.models.student.Student;
 import net.lzzy.practiceapi.utils.AppUtils;
 import net.lzzy.practiceapi.utils.StudentKeyUtils;
 import net.lzzy.sqllib.GenericAdapter;
 import net.lzzy.sqllib.ViewHolder;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -93,8 +99,73 @@ public class PracticeActivity extends AppCompatActivity {
         practiceLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                int courseId = practices.get(position).getCourseId();
+                int pid = practices.get(position).getId();
+                    AlertDialog dialog = new AlertDialog.Builder(PracticeActivity.this)
+                            .setMessage("是否下载题目")
+                            .setPositiveButton("下载", null)
+                            .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            })
 
+                            .create();
+                    dialog.show();
+                    dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            JSONObject object = new JSONObject();
+                            try {
+                                object.put("courseId", practices.get(position).getCourseId());
+                                object.put("practiceId", pid);
+                                object.put("studentId", AppUtils.getStudent().getStudentId());
+                                object.put("key", ApiConstants.getKey());
+                                new RequestThread<PracticeActivity>(PracticeActivity.this,
+                                        ApiConstants.getQuestionUrl(),
+                                        object.toString()) {
+                                    @Override
+                                    protected void onPostExecute(String s, PracticeActivity activity) {
+                                        try {
+                                            s = StudentKeyUtils.decodeResponse(s).first;
+                                            JSONObject object1=new JSONObject(s);
+                                            if (object1.getString("RESULT").equals("S")) {
+                                                Gson gson=new Gson();
+                                                JSONArray jsonArray=object1.getJSONArray("questions");
+                                                List<SQuestion> sQuestions=new ArrayList<>();
+                                                for (int i=0;i<jsonArray.length();i++){
+                                                    JSONObject object2=jsonArray.getJSONObject(i);
+                                                    JSONArray opions=object2.getJSONArray("options");
+                                                    object2.remove("options");
+                                                    SQuestion question=gson.fromJson(object2.toString(),SQuestion.class);
+                                                    List<SOption> options=new ArrayList<>();
+                                                    for (int j=0;j<opions.length();j++){
+                                                        SOption option=gson.fromJson(opions.getString(i),SOption.class);
+                                                        options.add(option);
+                                                    }
+                                                    question.setOptions(options);
+                                                    sQuestions.add(question);
+                                                }
+                                                AppUtils.setsQuestions(sQuestions);
+                                                Intent intent=new Intent(PracticeActivity.this,QuestionActivity.class);
+                                                startActivity(intent);
+                                                dialog.dismiss();
+                                            }
+                                            Toast.makeText(activity, s, Toast.LENGTH_LONG).show();
+                                        } catch (Exception e) {
+                                            Toast.makeText(activity, s, Toast.LENGTH_LONG).show();
+                                        }
+                                    }
+                                }.execute();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+
+                        }
+
+                    });
 
             }
         });
@@ -118,7 +189,7 @@ public class PracticeActivity extends AppCompatActivity {
         try {
             jsonObject.put("courseId", courseId);
             jsonObject.put("studentId",student.getStudentId() );
-            jsonObject.put("key", AppUtils.getKey());
+            jsonObject.put("key", ApiConstants.getKey());
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -75,7 +75,7 @@ public class GetQuestionFragment extends BaseFragment {
                     JSONObject jsonObject=new JSONObject();
                     try {
                         jsonObject.put("practiceId",pId);
-                        jsonObject.put("key", AppUtils.getKey());
+                        jsonObject.put("key", ApiConstants.getKey());
                         jsonObject.put("studentId",studentId);
                         jsonObject.put("courseId",courseId);
                     } catch (Exception e) {

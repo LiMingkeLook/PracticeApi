@@ -60,7 +60,7 @@ public class GetPracticeFragment extends BaseFragment {
                     try {
                         jsonObject.put("courseId", Integer.valueOf(t1));
                         jsonObject.put("studentId", t2);
-                        jsonObject.put("key", AppUtils.getKey());
+                        jsonObject.put("key", ApiConstants.getKey());
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

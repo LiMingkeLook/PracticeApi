@@ -1,10 +1,9 @@
 package net.lzzy.practiceapi.activities.teacher;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,14 +20,15 @@ import com.google.gson.reflect.TypeToken;
 import net.lzzy.practiceapi.R;
 import net.lzzy.practiceapi.Thread.RequestThread;
 import net.lzzy.practiceapi.connstants.ApiConstants;
-import net.lzzy.practiceapi.fragments.AddStudentToCourseFragment;
+import net.lzzy.practiceapi.activities.DialogFragment.DialogAddStudentToCourseFragment;
 import net.lzzy.practiceapi.models.Course;
-import net.lzzy.practiceapi.models.Student;
+import net.lzzy.practiceapi.models.student.Student;
 import net.lzzy.practiceapi.utils.AppUtils;
 import net.lzzy.practiceapi.utils.StudentKeyUtils;
 import net.lzzy.sqllib.GenericAdapter;
 import net.lzzy.sqllib.ViewHolder;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -43,6 +43,7 @@ public class ManageStudentsActivity extends AppCompatActivity {
     private SwipeRefreshLayout swipe;
     private Course course;
     private TextView edCourseName;
+    private FragmentManager manager=getSupportFragmentManager();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,19 +61,8 @@ public class ManageStudentsActivity extends AppCompatActivity {
             findViewById(R.id.activity_manage_students_bt_add_student).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    View view = LayoutInflater.from(ManageStudentsActivity.this).inflate(R.layout.dialog_add_student_to_course, null);
-                    AddStudentToCourseFragment fragment=AddStudentToCourseFragment.getInstance(course.getId());
-                    getSupportFragmentManager().beginTransaction().add(R.id.dialog_add_student_to_course_container,fragment);
-                    AlertDialog dialog = new AlertDialog.Builder(ManageStudentsActivity.this)
-                            .setMessage("添加学生到课程")
-                            .setNegativeButton("关闭", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            })
-                            .setView(view).create();
-                    dialog.show();
+                    DialogAddStudentToCourseFragment dialog=DialogAddStudentToCourseFragment.getInstance(course.getId());
+                    dialog.show(manager,"课程内添加删除学生");
                 }
             });
             studentGenericAdapter = new GenericAdapter<Student>(this,
@@ -137,8 +127,8 @@ public class ManageStudentsActivity extends AppCompatActivity {
             jsonObject.put("teacherId", AppUtils.getTeacher().getTeacherId());
             jsonObject.put("user","teacher");
             jsonObject.put("takeEffect",takeEffect);
-            jsonObject.put("studentIds",student.getStudentId()+"");
-            jsonObject.put("key", AppUtils.getKey());
+            jsonObject.put("studentIds",new JSONArray().put(student.getStudentId()));
+            jsonObject.put("key", ApiConstants.getKey());
             new RequestThread<ManageStudentsActivity>(ManageStudentsActivity.this,
                     ApiConstants.getCourseAppliedUrl(),
                     jsonObject.toString()) {
@@ -164,7 +154,7 @@ public class ManageStudentsActivity extends AppCompatActivity {
         try {
             jsonObject.put("courseId",course.getId());
             jsonObject.put("user", "teacher");
-            jsonObject.put("key", AppUtils.getKey());
+            jsonObject.put("key", ApiConstants.getKey());
             new RequestThread<ManageStudentsActivity>(ManageStudentsActivity.this,
                     ApiConstants.getStudentByCourseId(),
                     jsonObject.toString()) {
@@ -180,7 +170,7 @@ public class ManageStudentsActivity extends AppCompatActivity {
                             activity.students.addAll(students);
                             activity.studentGenericAdapter.notifyDataSetChanged();
                         }
-                        Toast.makeText(activity, s, Toast.LENGTH_LONG).show();
+                        Toast.makeText(activity, "刷新学生列表成功，数量："+students.size(), Toast.LENGTH_LONG).show();
 
                     } catch (Exception e) {
                         Toast.makeText(activity, s, Toast.LENGTH_LONG).show();

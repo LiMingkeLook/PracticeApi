@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".activities.teacher.ManagementCourseActivity">
     <TextView
+        android:id="@+id/activity_management_course_tv_name"
         android:text="课程名"
         android:padding="20dp"
         android:textColor="#3944A5"

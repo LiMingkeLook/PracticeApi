@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import net.lzzy.practiceapi.R;
 import net.lzzy.practiceapi.Thread.PracticeResultThread;
+import net.lzzy.practiceapi.connstants.ApiConstants;
 import net.lzzy.practiceapi.utils.AppUtils;
 import net.lzzy.practiceapi.utils.KeyUtils;
 
@@ -46,11 +47,8 @@ public class PostPracticeResultFragment extends BaseFragment {
     protected void populate() {
 
         initView();
-        if (!AppUtils.getIp().equals("")){
-            edIp.setText(AppUtils.getIp());
-        }else {
-            edIp.setText(AppUtils.NONE_IP);
-        }
+            edIp.setText(ApiConstants.getIpDelimiterPort());
+
         btPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

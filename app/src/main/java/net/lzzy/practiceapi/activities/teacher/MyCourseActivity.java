@@ -94,7 +94,7 @@ public class MyCourseActivity extends AppCompatActivity {
                                 jsonObject.put("courses",jsonArray);
                                 jsonObject.put("teacherId",teacher.getTeacherId());
                                 jsonObject.put("user","teacher");
-                                jsonObject.put("key",AppUtils.getKey());
+                                jsonObject.put("key",ApiConstants.getKey());
                                 new RequestThread<MyCourseActivity>(MyCourseActivity.this,
                                         ApiConstants.addCourseUrl(),
                                         jsonObject.toString()) {
@@ -164,7 +164,7 @@ public class MyCourseActivity extends AppCompatActivity {
                                     jsonObject.put("teacherId", teacherId);
                                     jsonObject.put("user", "teacher");
                                     jsonObject.put("courseId", course.getId());
-                                    jsonObject.put("key", AppUtils.getKey());
+                                    jsonObject.put("key", ApiConstants.getKey());
                                     new RequestThread<MyCourseActivity>(MyCourseActivity.this,
                                             ApiConstants.getDeleteCourseUrl(),
                                             jsonObject.toString()) {
@@ -222,7 +222,7 @@ public class MyCourseActivity extends AppCompatActivity {
                                                 jsonObject.put("teacherId", teacherId);
                                                 jsonObject.put("user","teacher");
                                                 jsonObject.put("course",course.toJSON());
-                                                jsonObject.put("key", AppUtils.getKey());
+                                                jsonObject.put("key", ApiConstants.getKey());
                                                 new RequestThread<MyCourseActivity>(MyCourseActivity.this,
                                                         ApiConstants.getUpdateCourseUrl(),
                                                         jsonObject.toString()) {
@@ -271,7 +271,7 @@ public class MyCourseActivity extends AppCompatActivity {
         try {
             jsonObject.put("teacherId", teacherId);
             jsonObject.put("user", "teacher");
-            jsonObject.put("key", AppUtils.getKey());
+            jsonObject.put("key", ApiConstants.getKey());
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -53,7 +53,8 @@
             android:label="选择老师" />
         <activity
             android:name=".activities.MainActivity"
-            android:label="测试用" />
+        android:label="测试用" />
+        <activity android:name=".activities.student.QuestionActivity" android:label="题目"/>
     </application>
 
 </manifest>

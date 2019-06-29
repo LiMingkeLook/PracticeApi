@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import net.lzzy.practiceapi.R;
@@ -19,6 +20,8 @@ public class ManagementCourseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_management_course);
 
         course = getIntent().getParcelableExtra("course");
+        TextView name=findViewById(R.id.activity_management_course_tv_name);
+        name.setText(course.getName());
         if (course == null) {
             Toast.makeText(this, "未获取到课程信息，请重新进入", Toast.LENGTH_LONG).show();
         } else {

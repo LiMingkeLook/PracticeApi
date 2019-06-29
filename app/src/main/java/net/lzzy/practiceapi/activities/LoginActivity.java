@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -24,16 +25,18 @@ import net.lzzy.practiceapi.activities.admin.AdminActivity;
 import net.lzzy.practiceapi.activities.student.MyTeacherActivity;
 import net.lzzy.practiceapi.activities.teacher.MyCourseActivity;
 import net.lzzy.practiceapi.connstants.ApiConstants;
+import net.lzzy.practiceapi.activities.DialogFragment.DialogSettingFragment;
 import net.lzzy.practiceapi.models.Admin;
-import net.lzzy.practiceapi.models.Student;
+import net.lzzy.practiceapi.models.student.Student;
 import net.lzzy.practiceapi.models.Teacher;
 import net.lzzy.practiceapi.utils.AppUtils;
+import net.lzzy.practiceapi.utils.DialogSettingUtil;
 import net.lzzy.practiceapi.utils.StudentKeyUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements DialogSettingFragment.SettingIPListener {
     private EditText edId;
     private EditText edname;
     private EditText edemail;
@@ -43,13 +46,15 @@ public class LoginActivity extends AppCompatActivity {
     private RadioGroup rgGender;
     private String user;
     private String rg;
+    private TextView tvIp;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        final EditText ip = findViewById(R.id.login_ip);
-        ip.setText(ApiConstants.getIpDelimiterPort());
+        tvIp = findViewById(R.id.login_ip);
+        tvIp.setOnClickListener(v -> DialogSettingUtil.showLoginDialog(getSupportFragmentManager()));
+        tvIp.setText("当前ip："+ApiConstants.getIpDelimiterPort()+" 触摸设置ip");
         final EditText usernameEditText = findViewById(R.id.username);
         final EditText passwordEditText = findViewById(R.id.password);
         final Button loginButton = findViewById(R.id.login);
@@ -65,7 +70,6 @@ public class LoginActivity extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ApiConstants.setIpDelimiterPort(ip.getText().toString());
                 View view = LayoutInflater.from(LoginActivity.this).inflate(R.layout.dialog_register, null);
                 edId = view.findViewById(R.id.studentId);
                 edname = view.findViewById(R.id.name);
@@ -75,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
                 ediphone = view.findViewById(R.id.iphone);
                 rgGender = view.findViewById(R.id.rg);
 
-                if (ip.getText().toString().equals("")) {
+                if (tvIp.getText().toString().equals("")) {
                     Toast.makeText(LoginActivity.this, "ip端口未输入", Toast.LENGTH_SHORT).show();
                 } else {
                     if (user.equals("student")) {
@@ -258,19 +262,17 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ApiConstants.setIpDelimiterPort(ip.getText().toString());
                 String iphone = usernameEditText.getText().toString();
                 String paw = passwordEditText.getText().toString();
-                if (ip.getText().toString().equals("")) {
-                    Toast.makeText(LoginActivity.this, "请输入ip:post", Toast.LENGTH_SHORT).show();
-                } else if (iphone.equals("") || paw.equals("")) {
+                if (iphone.equals("") || paw.equals("")) {
                     Toast.makeText(LoginActivity.this, "请输入用户名密码", Toast.LENGTH_SHORT).show();
                 } else {
                     AlertDialog dialog = new AlertDialog.Builder(LoginActivity.this).
                             setMessage("正在登录。。")
                             .show();
+                    //dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                     new LoginThread<LoginActivity>(LoginActivity.this, user,
-                            ip.getText().toString(), iphone, paw) {
+                            ApiConstants.getIpDelimiterPort(), iphone, paw) {
                         @Override
                         protected void onPostExecute(String s, LoginActivity loginActivity) {
                             dialog.dismiss();
@@ -278,8 +280,7 @@ public class LoginActivity extends AppCompatActivity {
                                 JSONObject object = new JSONObject(s);
                                 if (object.getString("RESULT").equals("S")) {
                                     Gson gson = new Gson();
-                                    ApiConstants.setIpDelimiterPort(ip.getText().toString());
-                                    AppUtils.setKey(object.getString("key"));
+                                    ApiConstants.setKey(object.getString("key"));
                                     if (user.equals("student")) {
                                         Student student = gson.fromJson(object.getString("student"), Student.class);
                                         AppUtils.setStudent(student);
@@ -311,5 +312,10 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public void onSettingIPInputComplete(String ip, String port) {
+        tvIp.setText("当前ip："+ip+":"+port+" 触摸设置ip");
     }
 }

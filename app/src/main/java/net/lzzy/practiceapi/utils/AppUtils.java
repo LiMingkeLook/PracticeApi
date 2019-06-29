@@ -2,19 +2,17 @@ package net.lzzy.practiceapi.utils;
 
 import android.app.Application;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.AudioManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.util.Pair;
 
 import net.lzzy.practiceapi.models.Admin;
-import net.lzzy.practiceapi.models.Student;
+import net.lzzy.practiceapi.models.student.SQuestion;
+import net.lzzy.practiceapi.models.student.Student;
 import net.lzzy.practiceapi.models.Teacher;
 
 import java.io.IOException;
@@ -50,28 +48,17 @@ public class AppUtils extends Application {
     private static WeakReference<Context> wContext;
     private static List<AppCompatActivity> activities = new LinkedList<>();
     private static String runningActivity;
-
-    private static String ip="";
-    private static String key="";
-    public static final String NONE_IP="192.168.1.101:8080";
-
-    public static String getKey() {
-            return key;
-    }
-
-    public static void setKey(String key) {
-        AppUtils.key = key;
-    }
-
-    public static String getIp() {
-        return ip;
-    }
-
-    public static void setIp(String ip) {
-        AppUtils.ip = ip;
-    }
+    private static List<SQuestion> sQuestions;
     private static Teacher teacher;
     private static Admin admin;
+
+    public static List<SQuestion> getsQuestions() {
+        return sQuestions;
+    }
+
+    public static void setsQuestions(List<SQuestion> sQuestions) {
+        AppUtils.sQuestions = sQuestions;
+    }
 
     public static Admin getAdmin() {
         return admin;

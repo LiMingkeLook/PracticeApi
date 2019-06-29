@@ -1,4 +1,4 @@
-package net.lzzy.practiceapi.models;
+package net.lzzy.practiceapi.models.teacher;
 
 
 import android.os.Parcel;
@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 public class Student implements Parcelable {
 
+
     protected Student(Parcel in) {
         studentId = in.readString();
         name = in.readString();
@@ -17,7 +18,9 @@ public class Student implements Parcelable {
         iphone = in.readString();
         gender = in.readString();
         imgHead = in.readString();
-        takeEffect=in.readInt();
+        byte tmpIsMyStudent = in.readByte();
+        isMyStudent = tmpIsMyStudent == 0 ? null : tmpIsMyStudent == 1;
+        takeEffect = in.readInt();
     }
 
     public static final Creator<Student> CREATOR = new Creator<Student>() {
@@ -64,6 +67,15 @@ public class Student implements Parcelable {
     private String gender;
 
     private String imgHead;
+    private Boolean isMyStudent;
+
+    public Boolean getMyStudent() {
+        return isMyStudent;
+    }
+
+    public void setMyStudent(Boolean myStudent) {
+        isMyStudent = myStudent;
+    }
 
     public int getTakeEffect() {
         return takeEffect;
@@ -131,6 +143,7 @@ public class Student implements Parcelable {
         this.imgHead = imgHead;
     }
 
+
     @Override
     public int describeContents() {
         return 0;
@@ -145,6 +158,7 @@ public class Student implements Parcelable {
         dest.writeString(iphone);
         dest.writeString(gender);
         dest.writeString(imgHead);
+        dest.writeByte((byte) (isMyStudent == null ? 0 : isMyStudent ? 1 : 2));
         dest.writeInt(takeEffect);
     }
 }
