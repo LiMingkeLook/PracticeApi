@@ -120,7 +120,6 @@ public class PracticeActivity extends AppCompatActivity {
                             try {
                                 object.put("courseId", practices.get(position).getCourseId());
                                 object.put("practiceId", pid);
-                                object.put("studentId", AppUtils.getStudent().getStudentId());
                                 object.put("key", ApiConstants.getKey());
                                 new RequestThread<PracticeActivity>(PracticeActivity.this,
                                         ApiConstants.getQuestionUrl(),

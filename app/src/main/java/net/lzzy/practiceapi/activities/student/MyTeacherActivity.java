@@ -87,11 +87,8 @@ public class MyTeacherActivity extends AppCompatActivity {
         swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Student student=AppUtils.getStudent();
                 JSONObject jsonObject=new JSONObject();
                 try {
-                    jsonObject.put("user","student");
-                    jsonObject.put("studentId",student.getStudentId());
                     jsonObject.put("key", ApiConstants.getKey());
                 } catch (Exception e) {
                     e.printStackTrace();

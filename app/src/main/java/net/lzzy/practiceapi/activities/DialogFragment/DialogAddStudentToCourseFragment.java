@@ -20,7 +20,7 @@ import com.google.gson.reflect.TypeToken;
 import net.lzzy.practiceapi.R;
 import net.lzzy.practiceapi.Thread.RequestThread;
 import net.lzzy.practiceapi.connstants.ApiConstants;
-import net.lzzy.practiceapi.models.student.Student;
+import net.lzzy.practiceapi.models.teacher.Student;
 import net.lzzy.practiceapi.utils.AppUtils;
 import net.lzzy.practiceapi.utils.StudentKeyUtils;
 import net.lzzy.practiceapi.utils.ViewUtils;
@@ -51,23 +51,23 @@ public class DialogAddStudentToCourseFragment extends DialogFragment {
         View empty = inflater.inflate(R.layout.empty_data, null);
         listView = view.findViewById(R.id.dialog_fragment_add_student_to_course_lv);
         listView.setEmptyView(empty);
-        SearchView search=view.findViewById(R.id.dialog_fragment_add_student_to_course_search);
+        SearchView search = view.findViewById(R.id.dialog_fragment_add_student_to_course_search);
         search.setOnQueryTextListener(new ViewUtils.AbstractQueryHandlerRadio() {
             @Override
             public void handleQuery(String kw) {
-                if ("".equals(kw)){
+                if ("".equals(kw)) {
                     getAllStudents();
-                }else {
+                } else {
                     searchStudentByKey(kw);
                 }
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if ("".equals(newText)){
+                if ("".equals(newText)) {
                     getAllStudents();
                     return true;
-                }else {
+                } else {
                     return false;
                 }
             }
@@ -78,23 +78,25 @@ public class DialogAddStudentToCourseFragment extends DialogFragment {
             public void populate(ViewHolder viewHolder, Student student) {
                 viewHolder.setTextView(R.id.item_fragment_add_student_to_course_tv_studentName, student.getName());
                 viewHolder.setTextView(R.id.item_fragment_add_student_to_course_tv_studentId, student.getStudentId());
-                viewHolder.setImageResource(R.id.item_fragment_add_student_to_course_img_studentImg,R.drawable.no);
-                CheckBox checkBox=viewHolder.getView(R.id.item_fragment_add_student_to_course_cb);
-                if (student.getTakeEffect()==1){
+                viewHolder.setImageResource(R.id.item_fragment_add_student_to_course_img_studentImg, R.drawable.no);
+                CheckBox checkBox = viewHolder.getView(R.id.item_fragment_add_student_to_course_cb);
+                if (student.getMyStudent()) {
                     checkBox.setChecked(true);
-                    //checkBox.setText("已授权");
+                    checkBox.setTag(true);
+                    checkBox.setText("已添加");
                     checkBox.setTextColor(Color.parseColor("#38B31D"));
-                }else {
+                } else {
                     checkBox.setChecked(false);
-                    //checkBox.setText("未授权");
+                    checkBox.setTag(false);
+                    checkBox.setText("未添加");
                     checkBox.setTextColor(Color.parseColor("#CA1919"));
                 }
                 checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        int takeEffect=0;
-                        if (isChecked){
-                            takeEffect=1;
+                        int takeEffect = 1;
+                        if (!isChecked) {
+                            takeEffect = -1;
                         }
                         getCourseApplied(takeEffect, student);
                     }
@@ -115,9 +117,9 @@ public class DialogAddStudentToCourseFragment extends DialogFragment {
         };
         listView.setAdapter(studentGenericAdapter);
         getAllStudents();
-        AlertDialog dialog= new AlertDialog.Builder(getActivity())
+        AlertDialog dialog = new AlertDialog.Builder(getActivity())
                 .setMessage("课程内添加删除学生")
-                .setNegativeButton("关闭",null)
+                .setNegativeButton("关闭", null)
                 .setView(view)
                 .create();
         dialog.show();
@@ -136,15 +138,16 @@ public class DialogAddStudentToCourseFragment extends DialogFragment {
                 protected void onPostExecute(String s, DialogAddStudentToCourseFragment fragment) {
                     try {
                         s = StudentKeyUtils.decodeResponse(s).first;
-                        JSONObject object1=new JSONObject(s);
+                        JSONObject object1 = new JSONObject(s);
                         if (s.contains("\"RESULT\":\"S\"")) {
-                            Gson gson=new Gson();
-                            List<Student> students=gson.fromJson(object1.getString("students"),
-                                    new TypeToken<LinkedList<Student>>() {}.getType());
+                            Gson gson = new Gson();
+                            List<Student> students = gson.fromJson(object1.getString("students"),
+                                    new TypeToken<LinkedList<Student>>() {
+                                    }.getType());
                             fragment.studentGenericAdapter.clear();
                             fragment.studentGenericAdapter.addAll(students);
                         }
-                        Toast.makeText(fragment.getActivity(), s+students.size(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(fragment.getActivity(), s + students.size(), Toast.LENGTH_LONG).show();
 
                     } catch (Exception e) {
                         Toast.makeText(fragment.getActivity(), s, Toast.LENGTH_LONG).show();
@@ -157,16 +160,16 @@ public class DialogAddStudentToCourseFragment extends DialogFragment {
     }
 
     /**
-     * @param takeEffect 1:申请课程，2：取消课程申请
+     * @param takeEffect 1:添加学生到课程，-1：从课程移除学生
      * @param student
      */
     private void getCourseApplied(int takeEffect, Student student) {
         JSONObject object = new JSONObject();
-        JSONArray jsonArray=new JSONArray();
+        JSONArray jsonArray = new JSONArray();
         try {
-            object.put("takeEffect",takeEffect);
+            object.put("takeEffect", takeEffect);
             object.put("courseId", courseId);
-            object.put("teacherId", AppUtils.getTeacher().getTeacherId());
+            /*object.put("teacherId", AppUtils.getTeacher().getTeacherId());*/
             object.put("studentIds", jsonArray.put(student.getStudentId()));
             object.put("key", ApiConstants.getKey());
             new RequestThread<DialogAddStudentToCourseFragment>(DialogAddStudentToCourseFragment.this,
@@ -177,6 +180,12 @@ public class DialogAddStudentToCourseFragment extends DialogFragment {
                     try {
                         s = StudentKeyUtils.decodeResponse(s).first;
                         if (s.contains("\"RESULT\":\"S\"")) {
+                            if (takeEffect == -1) {
+                                Toast.makeText(fragment.getActivity(), "删除成功", Toast.LENGTH_LONG).show();
+                            } else if (takeEffect == 1) {
+                                Toast.makeText(fragment.getActivity(), "添加成功", Toast.LENGTH_LONG).show();
+                            }
+                            //getAllStudents();
                         }
                         Toast.makeText(fragment.getActivity(), s, Toast.LENGTH_LONG).show();
 
@@ -208,15 +217,15 @@ public class DialogAddStudentToCourseFragment extends DialogFragment {
 
 
     private void getAllStudents() {
-        JSONObject jsonObject=new JSONObject();
+        JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("teacherId","8888");
+            jsonObject.put("courseId", courseId);
             jsonObject.put("key", ApiConstants.getKey());
         } catch (JSONException e) {
             e.printStackTrace();
         }
         new RequestThread<DialogAddStudentToCourseFragment>(DialogAddStudentToCourseFragment.this,
-                ApiConstants.getAllStudentUrl(), jsonObject.toString()) {
+                ApiConstants.getAllStudentAndIsTeacherCoursesStudent(), jsonObject.toString()) {
             @Override
             protected void onPostExecute(String s, DialogAddStudentToCourseFragment fragment) {
                 try {
@@ -228,7 +237,7 @@ public class DialogAddStudentToCourseFragment extends DialogFragment {
                                 }.getType());
                         fragment.studentGenericAdapter.clear();
                         fragment.studentGenericAdapter.addAll(students);
-                        Toast.makeText(fragment.getActivity(), "获取全部学生成功，数量："+students.size(),
+                        Toast.makeText(fragment.getActivity(), "获取全部学生成功，数量：" + students.size(),
                                 Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(fragment.getActivity(), s, Toast.LENGTH_LONG).show();

@@ -17,12 +17,12 @@
     <string name="practice_id">练习id：</string>
     <string name="practice_count">练习数量：</string>
     <string name="practice_count_hint">练习数量</string>
-    <string name="_2">2</string>
+    <string name="_2">20170313007</string>
     <string name="max_1_0">分数比例（max：1.0）：</string>
     <string name="max_1_0_1">分数比例（max：1.0）</string>
     <string name="err">错误的题目：</string>
     <string name="err_hint">错误的题目</string>
-    <string name="_1_2_3_hint">1、2、3</string>
+    <string name="_A_B_C_hint">A,B,C</string>
     <string name="phoneno">phoneNo：</string>
     <string name="mac">手机号或mac</string>
     <string name="post_result">上传结果</string>

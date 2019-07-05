@@ -124,8 +124,8 @@ public class ManageStudentsActivity extends AppCompatActivity {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("courseId", course.getId());
-            jsonObject.put("teacherId", AppUtils.getTeacher().getTeacherId());
-            jsonObject.put("user","teacher");
+            /*jsonObject.put("teacherId", AppUtils.getTeacher().getTeacherId());*/
+            /*jsonObject.put("user","teacher");*/
             jsonObject.put("takeEffect",takeEffect);
             jsonObject.put("studentIds",new JSONArray().put(student.getStudentId()));
             jsonObject.put("key", ApiConstants.getKey());
@@ -153,7 +153,7 @@ public class ManageStudentsActivity extends AppCompatActivity {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("courseId",course.getId());
-            jsonObject.put("user", "teacher");
+            /*jsonObject.put("user", "teacher");*/
             jsonObject.put("key", ApiConstants.getKey());
             new RequestThread<ManageStudentsActivity>(ManageStudentsActivity.this,
                     ApiConstants.getStudentByCourseId(),

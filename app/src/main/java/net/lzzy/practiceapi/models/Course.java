@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import net.lzzy.practiceapi.R;
+
 import java.util.Date;
 
 
@@ -21,6 +23,12 @@ public class Course implements Parcelable {
 
     private String addTime;
 
+    /**
+     * -1:未申请该课程
+     * 0:等待老师批准
+     * 1:是我的课程
+     * 2:拒绝了你的申请
+     */
     private Integer applicationStatus;
 
     protected Course(Parcel in) {

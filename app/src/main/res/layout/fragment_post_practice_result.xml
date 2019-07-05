@@ -43,7 +43,7 @@
         <EditText
             android:id="@+id/fragment_post_practice_result_ed_practiceId"
             android:hint="@string/practice_id"
-            android:text="@string/_2"
+            android:text="1"
             android:inputType="number"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -57,7 +57,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
-            android:text="@string/max_1_0"
+            android:text="学生id"
             android:layout_marginStart="10dp"
             android:gravity="center"
             android:textStyle="bold"
@@ -66,7 +66,7 @@
             android:layout_height="match_parent" />
 
         <EditText
-            android:id="@+id/fragment_post_practice_result_ed_scroreRatio"
+            android:id="@+id/fragment_post_practice_result_ed_studentId"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -81,7 +81,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
-            android:text="@string/err"
+            android:text="studentAnswer"
             android:layout_marginStart="10dp"
             android:gravity="center"
             android:textStyle="bold"
@@ -89,9 +89,31 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
         <EditText
-            android:id="@+id/fragment_post_practice_result_ed_wrongQuestionIds"
-            android:hint="@string/err_hint"
-            android:text="@string/_1_2_3_hint"
+            android:id="@+id/fragment_post_practice_result_ed_studentAnswer"
+            android:hint="选择的答案"
+            android:text="@string/_A_B_C_hint"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="错误类型"
+            android:layout_marginStart="10dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="#000"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <EditText
+            android:id="@+id/fragment_post_practice_result_ed_wrongTpye"
+            android:hint="0：正确，1少选，2多选，3错选"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content" />
@@ -103,7 +125,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
-            android:text="@string/phoneno"
+            android:text="questionId"
             android:layout_marginStart="10dp"
             android:gravity="center"
             android:textStyle="bold"
@@ -111,9 +133,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
         <EditText
-            android:id="@+id/fragment_post_practice_result_ed_phoneNo"
-            android:hint="@string/mac"
-            android:text="@string/_2"
+            android:id="@+id/fragment_post_practice_result_ed_questionId"
+            android:hint="1"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content" />

@@ -88,7 +88,7 @@ public class ApiConstants {
         return HTTP+IP_DELIMITER_PORT+ GET_STUDENT_BY_COURSEID;
     }
     public static String getAllStudentAndIsTeacherCoursesStudent() {
-        return HTTP+IP_DELIMITER_PORT+ GET_STUDENT_BY_COURSEID;
+        return HTTP+IP_DELIMITER_PORT+ GET_ALL_STUDENT_AND_IS_TEACHER_COURSES_STUDENT;
     }
     public static String getAuthorization_teacher() {
         return HTTP+IP_DELIMITER_PORT+ AUTHORIZATION_TEACHER;

@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import net.lzzy.practiceapi.network.ApiService;
 import net.lzzy.practiceapi.utils.AppUtils;
 import net.lzzy.practiceapi.utils.KeyUtils;
+import net.lzzy.practiceapi.utils.StudentKeyUtils;
 
 import org.json.JSONObject;
 
@@ -32,7 +33,7 @@ public abstract class PracticeResultThread<T> extends AsyncTask<Void,Void, Strin
     protected String doInBackground(Void... voids) {
         try {
                 return ApiService.okRequest("http://"+ip+"/Practice/api/post_PracticeResult",
-                        KeyUtils.encryptionJson(json));
+                        StudentKeyUtils.encryptionRequest(json));
         } catch (Exception e) {
             e.printStackTrace();
             return "错误："+e.getMessage();

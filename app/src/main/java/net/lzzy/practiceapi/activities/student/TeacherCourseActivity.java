@@ -124,7 +124,7 @@ public class TeacherCourseActivity extends AppCompatActivity {
                                 JSONObject object = new JSONObject();
                                 try {
                                     object.put("courseId", course.getId());
-                                    object.put("studentId", student.getStudentId());
+                                    /*object.put("studentId", student.getStudentId());*/
                                     object.put("key", ApiConstants.getKey());
                                     new RequestThread<TeacherCourseActivity>(TeacherCourseActivity.this,
                                             ApiConstants.getCourseAppliedUrl(),
@@ -171,8 +171,6 @@ public class TeacherCourseActivity extends AppCompatActivity {
         JSONObject jsonObject=new JSONObject();
         try {
             jsonObject.put("teacherId",teacherId);
-            jsonObject.put("user","student");
-            jsonObject.put("studentId",student.getStudentId());
             jsonObject.put("key", ApiConstants.getKey());
         } catch (Exception e) {
             e.printStackTrace();

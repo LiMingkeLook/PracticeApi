@@ -83,7 +83,7 @@ public class MyCourseActivity extends AppCompatActivity {
                             JSONArray jsonArray=new JSONArray();
                             JSONObject object=new JSONObject();
                             try {
-                                object.put("teacherId", teacher.getTeacherId());
+                                /*object.put("teacherId", teacher.getTeacherId());*/
                                 object.put("name", name);
                                 object.put("intro", intro);
                             } catch (JSONException e) {
@@ -92,8 +92,8 @@ public class MyCourseActivity extends AppCompatActivity {
                             jsonArray.put(object);
                             try {
                                 jsonObject.put("courses",jsonArray);
-                                jsonObject.put("teacherId",teacher.getTeacherId());
-                                jsonObject.put("user","teacher");
+                                /*jsonObject.put("teacherId",teacher.getTeacherId());*/
+                                /*jsonObject.put("user","teacher");*/
                                 jsonObject.put("key",ApiConstants.getKey());
                                 new RequestThread<MyCourseActivity>(MyCourseActivity.this,
                                         ApiConstants.addCourseUrl(),
@@ -161,8 +161,8 @@ public class MyCourseActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 JSONObject jsonObject = new JSONObject();
                                 try {
-                                    jsonObject.put("teacherId", teacherId);
-                                    jsonObject.put("user", "teacher");
+                                    /*jsonObject.put("teacherId", teacherId);
+                                    jsonObject.put("user", "teacher");*/
                                     jsonObject.put("courseId", course.getId());
                                     jsonObject.put("key", ApiConstants.getKey());
                                     new RequestThread<MyCourseActivity>(MyCourseActivity.this,
@@ -219,8 +219,8 @@ public class MyCourseActivity extends AppCompatActivity {
                                             course.setIntro(intro);
                                             try {
                                                 jsonObject.put("courseId", course.getId());
-                                                jsonObject.put("teacherId", teacherId);
-                                                jsonObject.put("user","teacher");
+                                                /*jsonObject.put("teacherId", teacherId);
+                                                jsonObject.put("user","teacher");*/
                                                 jsonObject.put("course",course.toJSON());
                                                 jsonObject.put("key", ApiConstants.getKey());
                                                 new RequestThread<MyCourseActivity>(MyCourseActivity.this,
@@ -269,8 +269,8 @@ public class MyCourseActivity extends AppCompatActivity {
     private void getCourse() {
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("teacherId", teacherId);
-            jsonObject.put("user", "teacher");
+          /*  jsonObject.put("teacherId", teacherId);
+            jsonObject.put("user", "teacher");*/
             jsonObject.put("key", ApiConstants.getKey());
         } catch (Exception e) {
             e.printStackTrace();
