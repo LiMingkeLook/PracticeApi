@@ -96,7 +96,7 @@ public class PostPracticeResultFragment extends BaseFragment {
                                     , PostPracticeResultFragment postPracticeResultFragment) {
                                 dialog.dismiss();
                                 try {
-                                    s = StudentKeyUtils.decodeResponse(s).first;
+                                 /*   s = StudentKeyUtils.decodeResponse(s).first;*/
                                     edHint.setText(s);
                                 } catch (Exception e) {
                                     e.printStackTrace();

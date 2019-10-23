@@ -42,6 +42,7 @@ public abstract class LoginThread<T> extends AsyncTask<Void,Void, String> {
                 jsonObject.put("iphone",iphone);
                 jsonObject.put("password",paw);
                 jsonObject.put("user", role);
+                //jsonObject.put("loginTime", System.currentTimeMillis());
                 return ApiService.okRequest("http://"+ip+"/Practice/api/login"
                         , StudentKeyUtils.encryptionRequest(jsonObject.toString()));
             } catch (JSONException e) {
@@ -61,7 +62,8 @@ public abstract class LoginThread<T> extends AsyncTask<Void,Void, String> {
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
         T t = context.get();
-            onPostExecute(StudentKeyUtils.decodeResponse(s).first, t);
+            /*onPostExecute(StudentKeyUtils.decodeResponse(s).first, t);*/
+        onPostExecute(s, t);
     }
 
     protected abstract void onPostExecute(String s, T t);

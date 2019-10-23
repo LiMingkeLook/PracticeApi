@@ -63,7 +63,7 @@ public class AddCourseFragment extends BaseFragment {
                     @Override
                     protected void onPostExecute(String s, AddCourseFragment enrolledStudentFragment) {
                         try {
-                            s= KeyUtils.decodeJSon(s);
+                            /*s= KeyUtils.decodeJSon(s);*/
                             hint.setText(s);
                         } catch (Exception e) {
                             e.printStackTrace();

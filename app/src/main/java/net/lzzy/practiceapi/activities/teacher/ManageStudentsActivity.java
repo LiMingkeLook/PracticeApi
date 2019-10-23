@@ -155,6 +155,7 @@ public class ManageStudentsActivity extends AppCompatActivity {
             jsonObject.put("courseId",course.getId());
             /*jsonObject.put("user", "teacher");*/
             jsonObject.put("key", ApiConstants.getKey());
+
             new RequestThread<ManageStudentsActivity>(ManageStudentsActivity.this,
                     ApiConstants.getStudentByCourseId(),
                     jsonObject.toString()) {

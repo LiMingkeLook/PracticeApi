@@ -146,8 +146,8 @@ public class ManagementOfTeachersFragment extends BaseFragment {
         JSONObject object = new JSONObject();
         try {
             object.put("valid", valid);
-            object.put("teachers", new JSONArray().put(teacherId));
-            object.put("user", "admin");
+            object.put("teacherIds", new JSONArray().put(teacherId));
+            //object.put("user", "admin");
             object.put("key", ApiConstants.getKey());
             new RequestThread<ManagementOfTeachersFragment>(ManagementOfTeachersFragment.this,
                     ApiConstants.getAuthorization_teacher(),

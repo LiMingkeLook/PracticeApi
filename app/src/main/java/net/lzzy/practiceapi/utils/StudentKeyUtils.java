@@ -21,7 +21,7 @@ public class StudentKeyUtils {
      * @return 已加密的json请求数据
      */
     public static String encryptionRequest(String content) throws JSONException {
-        StringBuilder sb = new StringBuilder();
+        /*StringBuilder sb = new StringBuilder();
         String[] contents;
         char[] timeMillis1 = String.valueOf(System.currentTimeMillis()).toCharArray();
         String[] timeMillis = new String[timeMillis1.length];
@@ -70,7 +70,8 @@ public class StudentKeyUtils {
         }
         JSONObject object=new JSONObject();
         object.put(CONTENT,sb.toString());
-        return object.toString();
+        return object.toString();*/
+        return content;
     }
 
     /**
@@ -80,7 +81,7 @@ public class StudentKeyUtils {
      * @throws Exception
      */
     public static Pair<String, Long> decodeResponse(String bodyRequest) {
-        JSONObject object= null;
+        /*JSONObject object= null;
         try {
             object = new JSONObject(bodyRequest);
             String convertContent=object.getString(CONTENT);
@@ -118,7 +119,8 @@ public class StudentKeyUtils {
         } catch (JSONException e) {
             e.printStackTrace();
             return new Pair<String, Long>(bodyRequest,System.currentTimeMillis()) ;
-        }
+        }*/
+        return new Pair<String, Long>(bodyRequest,System.currentTimeMillis()) ;
 
 
     }
